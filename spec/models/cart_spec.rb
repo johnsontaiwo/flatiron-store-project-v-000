@@ -5,6 +5,7 @@ RSpec.describe Cart, :type => :model do
     @item = Item.first
     @cart = Cart.create
     @line_item = @item.line_items.create(quantity: 1, cart: @cart)
+
   end
 
   describe 'items' do 
@@ -28,8 +29,9 @@ RSpec.describe Cart, :type => :model do
       second_item = Item.second
       second_line_item = @cart.add_item(second_item.id)
       expect(second_line_item.new_record?).to be_truthy
+      
     end
-
+      
     it 'creates an appropriate line_item' do
       second_item = Item.second
       second_line_item = @cart.add_item(second_item.id)
@@ -43,5 +45,7 @@ RSpec.describe Cart, :type => :model do
       @line_item2.save
       expect(@line_item.id).to eq(@line_item2.id)
     end
+
   end
+  
 end
