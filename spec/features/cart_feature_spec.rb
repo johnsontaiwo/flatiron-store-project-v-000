@@ -78,6 +78,7 @@ describe 'Feature Test: Cart', :type => :feature do
         first_item = Item.first
         first_item.line_items.create(quantity: 1, cart: @user.current_cart)
         @user.save
+        #binding.pry
         visit store_path
         expect(page).to have_link("Cart", href: cart_path(@user.current_cart))
       end
