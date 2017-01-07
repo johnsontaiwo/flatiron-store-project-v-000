@@ -1,16 +1,14 @@
 class CartsController < ApplicationController
- #before_action :set_cart, only: [:show, :checkout]
+ before_action :set_cart, only: [:show, :checkout]
 
 
   def show
-    @current_cart =  current_user.current_cart
-    #binding.pry
+    #@current_cart =  Cart.find(params[:id])
   end
   
 
   def checkout
-  
-   @current_cart = current_user.current_cart
+   #@current_cart = Cart.find(params[:id])
    
    @current_cart.line_items.each do |line_item|
     item = Item.find(line_item.item_id)
@@ -18,12 +16,12 @@ class CartsController < ApplicationController
     item.save
     #binding.pry
    end
-
+   #@current_cart.update(status: "submitted")
    current_user.remove_cart
-     
+   @current_cart.update(status: "submitted")
    
    redirect_to cart_path(@current_cart)
-   
+   #binding.pry
   end
 
   private
